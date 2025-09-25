@@ -3,36 +3,37 @@
 if (!require(pacman)) install.packages("pacman")
 pacman::p_load(tidyverse,
                sf,
-               mapview)
+               mapview,
+               here)
 
 
 # read/export vector data --------------------------------------------------
 
 # read a shapefile (e.g., ESRI Shapefile format)
 # `quiet = TRUE` just for cleaner output
-sf_nc_county <- st_read(dsn = "data/nc.shp",
+sf_nc_county <- st_read(dsn = here("data/nc.shp"),
                          quiet = TRUE)
 
 #save as shape file
 st_write(sf_nc_county,
-         dsn = "data/sf_nc_county.shp",
+         dsn = here("data/sf_nc_county.shp"),
          append = FALSE)
 
 #save as geopackage
 st_write(sf_nc_county,
-         dsn = "data/sf_nc_county.gpkg",
+         dsn = here("data/sf_nc_county.gpkg"),
          append = FALSE)
 
 #save as rds
 saveRDS(sf_nc_county,
-         file = "data/sf_nc_county.rds")
+         file = here("data/sf_nc_county.rds"))
 
 #read rds
-sf_nc_county <- readRDS(file = "data/sf_nc_county.rds")
+sf_nc_county <- readRDS(file = here("data/sf_nc_county.rds"))
 
 
 ##point data 
-sf_site <- readRDS(file = "data/sf_finsync_nc.rds")
+sf_site <- readRDS(file = here("data/sf_finsync_nc.rds"))
 
 
 mapview(sf_site,
@@ -47,7 +48,7 @@ mapview(sf_site10,
         legend = FALSE)
 
 #line data
-(sf_str <- readRDS("data/sf_stream_gi.rds"))
+sf_str <- readRDS(file = here("data/sf_stream_gi.rds"))
 
 mapview(sf_str,
         color = "steelblue", # line's color
@@ -94,7 +95,7 @@ ggplot() +
 
 #1.Read stream line data for Ashe county 
 ##Load the stream line data file sf_stream_as.rds located in the data folder. Use readRDS().
- sf_str_as <- readRDS(file = "data/sf_stream_as.rds")
+ sf_str_as <- readRDS(file = here("data/sf_stream_as.rds"))
 
 
 #2. Check coordinate reference systems (CRS) (ref: Section 3.2.2)
