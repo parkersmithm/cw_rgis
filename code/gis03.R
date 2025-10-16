@@ -8,11 +8,11 @@ pacman::p_load(tidyverse,
 # spatial join ------------------------------------------------------------
 
 ##point vector
-sf_site <- readRDS("data/sf_finsync_nc.rds")
+sf_site <- readRDS(here("data/sf_finsync_nc.rds"))
 
 
 ##polygon vector
-sf_nc_county <- readRDS("data/sf_nc_county.rds")
+sf_nc_county <- readRDS(here("data/sf_nc_county.rds"))
 
 ## st_join() evaluates two geometry layers
 sf_site_join <- st_join(x = sf_site,
@@ -118,9 +118,9 @@ ggplot() +
 # Assign the resulting joined object to sf_quakes_join.
 # In sf_quakes_join, earthquake events that occurred outside New Zealand should have NA in the fid column. Use drop_na(sf_quakes, fid) to remove quakes that occurred outside New Zealand, and assign the resulting object to sf_quakes_nz.
 # Count the number of earthquake events in New Zealand by counting the number of rows in sf_quakes_nz. Use nrow() function to count.
-sf_quakes <- readRDS("data/sf_quakes.rds")
+sf_quakes <- readRDS(here("data/sf_quakes.rds"))
 
-sf_nz <- readRDS("data/sf_nz.rds")
+sf_nz <- readRDS(here("data/sf_nz.rds"))
 
 mapview(sf_nz) + mapview(sf_quakes)
 
